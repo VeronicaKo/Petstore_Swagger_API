@@ -4,6 +4,7 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.Test;
 import pojos.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -19,18 +20,21 @@ public class PetTest {
                     .setContentType(ContentType.JSON)
                     .build();
 
-
     @Test
     public void createPet() {
+        List listTags = new ArrayList<CreateTagsItem>();
+        listTags.add(CreateTagsItem.builder().id(0).name("string").build());
+        List listPhoto = new ArrayList<CreatePhotoUrls>();
+        listPhoto.add(CreatePhotoUrls.builder().name("string").build());
+
         CreatePetRequest rq = CreatePetRequest.builder()
                 .name("doggie")
                 .id(0)
                 .createCategory(CreateCategory.builder().id(0).name("string").build())
-//                .tags((List<CreateTagsItem>) CreateTagsItem.builder().id(0).name("string").build())
-//                .photoUrls((List<CreatePhotoUrls>) CreatePhotoUrls.builder().name("string").build())
+                .tags(listTags)
+//                .photoUrls(listPhoto)
                 .status("available")
                 .build();
-
 
         CreatePetResponse rs = given()
                 .spec(REQ_SPEC)
