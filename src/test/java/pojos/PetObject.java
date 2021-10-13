@@ -18,5 +18,5 @@ public class PetObject{
 	private String status;
 	private CreateCategory category;
 	private List<CreateTagsItem> tags;
-	private List<String> photoUrls;
+	private List<CreatePhotoUrls> photoUrls;
 }
