@@ -52,7 +52,8 @@ public class PetTest {
                 .spec(REQ_SPEC)
                 .body(rq)
                 .when().post()
-                .then().spec(responseSpec)
+                .then()
+                .assertThat().statusCode(200)
                 .log().all()
                 .extract().as(CreatePetResponse.class);
 
@@ -80,7 +81,8 @@ public class PetTest {
                 .spec(REQ_SPEC)
                 .body(rq)
                 .when().put()
-                .then().spec(responseSpec)
+                .then()
+                .assertThat().statusCode(200)
                 .log().all()
                 .extract().as(CreatePetResponse.class);
 
@@ -96,7 +98,8 @@ public class PetTest {
                         .basePath("/pet/findByStatus")
                         .queryParam("status", "sold")
                         .when().get()
-                        .then().spec(responseSpec)
+                        .then()
+                        .assertThat().statusCode(200)
                         .extract().jsonPath().get("name");
 //        .getList("photoUrls", CreatePetResponse.class);
 
@@ -108,10 +111,10 @@ public class PetTest {
     public void deletePet() {
         given()
                 .spec(REQ_SPEC)
-                .basePath("/pet/90369791")
-//                .log().all()
-                .when().get()
-                .then().spec(responseSpec);
+                .basePath("/pet/15435006001660")
+                .when().delete()
+                .then()
+                .assertThat().statusCode(200);
 
     }
 
